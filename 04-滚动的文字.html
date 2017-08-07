@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .box{
+            width:500px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px red solid;
+            position: relative;
+        }
+        .box ul{
+            position: absolute;
+            overflow: hidden;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(function(){
+            conternHeight=$(".box ul").height();
+            boxHeight=$(".box").height();
+            var y =conternHeight - boxHeight;
+           // alert(conternHeight - boxHeight)
+            var num=0;
+            function tink(){
+                num--
+
+               if (num < -y)
+               {
+                   num=0;
+               }
+                $(".box ul").animate({
+                    top: num + "px"
+                },0)
+            };
+
+         var timer= setInterval(tink,50);
+
+            $(".box ul").hover(function(){
+                clearInterval(timer);
+            },function(){
+                clearInterval(timer)
+                timer= setInterval(tink,50);
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国</li>
+            <li>11111111111111111111111</li>
+            <li>22222222222222222222</li>
+            <li>达到小日本</li>
+            <li>33333333333</li>
+            <li>达到小日本</li>
+            <li>我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国</li>
+            <li>666666666666666666666</li>
+            <li>55555555555555555555555</li>
+            <li>我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国</li>
+            <li>11111111111111111111111</li>
+            <li>22222222222222222222</li>
+            <li>达到小日本</li>
+            <li>33333333333</li>
+            <li>达到小日本</li>
+            <li>我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国</li>
+            <li>666666666666666666666</li>
+            <li>55555555555555555555555</li>
+            <li>我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国</li>
+            <li>11111111111111111111111</li>
+            <li>22222222222222222222</li>
+            <li>达到小日本</li>
+            <li>33333333333</li>
+            <li>达到小日本</li>
+            <li>我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国我爱中国</li>
+            <li>666666666666666666666</li>
+            <li>55555555555555555555555</li>
+
+        </ul>
+    </div>
+</body>
+</html>

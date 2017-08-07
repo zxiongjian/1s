@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script src="js/jquery.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+.tip{
+	position:absolute;
+	display:none;
+}
+</style>
+<body>
+<a href="#">北京的好玩的地方</a>
+<script>
+$("a").hover(function(){
+	$("body").append("<div class=tip><img src=images/0.jpg width=300 height=200 /></div>");
+	$(".tip").fadeIn(400);
+},function(){
+	$(".tip").remove();
+}).mousemove(function(e){
+	$(".tip").css("top",(e.pageY+20)+"px");
+	$(".tip").css("left",(e.pageX+20)+"px")
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .wapapp{
+            width:790px;
+            height: 340px;
+            position: relative;
+            margin: 80px auto;
+        }
+        .wapapp ul{
+            position: relative;
+            z-index: 1;
+        }
+        .wapapp ul li{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+        .wapapp ol{
+            position: relative;
+            top: 85%;
+            z-index: 2;
+            text-align: center;
+            background-color:rgba(255,255,255,.3);
+            width:180px;
+            line-height: 16px;
+            margin: auto;
+            border-radius: 50px;
+            font-size: 0px;
+            padding: 0px 10px;
+        }
+        .wapapp ol li{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius:50%;
+            margin-top: 8px;
+        }
+        .wapapp ol li + li{
+            margin-left: 10px;
+        }
+        .wapapp ol li.cur{
+            background: red;
+        }
+        .wapapp .ctrl-a a{
+            display: block;
+            background: #FFFFFF;
+            width:80px;
+            height: 30px;
+            border-radius: 5px;
+            opacity: 0.7;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+            z-index: 3;
+        }
+        .wapapp .ctrl-a a:nth-child(1){
+            right: 0px;
+            top:50%;
+            margin-top: -15px;
+        }
+        .wapapp .ctrl-a a:nth-child(2){
+            left: 0px;
+            top:50%;
+            margin-top: -15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wapapp">
+        <ul>
+            <li><a href="#"><img src="images/01.jpg"></a></li>
+            <li><a href="#"><img src="images/02.jpg"></a></li>
+            <li><a href="#"><img src="images/03.jpg"></a></li>
+            <li><a href="#"><img src="images/04.png"></a></li>
+            <li><a href="#"><img src="images/05.png"></a></li>
+        </ul>
+        <!--<ol>
+            <li class="cur"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>-->
+        <div class="ctrl-a">
+            <a href="javascript:;">下一张</a>
+            <a href="javascript:;">上一张</a>
+        </div>
+    </div>
+
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(function(){
+            /*动态创建*/
+            var $wapBanner=$(".wapapp > ul"),$wapBnnnerLi=$(".wapapp > ul li");
+
+            $wapBanner.after("<ol></ol>");
+            $wapBnnnerLi.each(function(){
+                $(".wapapp > ol").append("<li></li>");
+            });
+            $(".wapapp > ol li:first").addClass("cur");
+            /*end*/
+
+            $(".wapapp ul li:first").fadeIn().siblings().fadeOut();
+            $(".wapapp ol li").mouseenter(function(){
+                $(this).addClass("cur").siblings().removeClass("cur");
+                $(".wapapp ul li").eq($(this).index()).fadeIn().siblings().fadeOut();
+                //关键代码
+                num=$(this).index();
+            });
+
+/* ----------------自动轮播开始------------------*/
+            var timer=null;
+            var num=0;
+            function tink(){
+                clearInterval(timer);
+                timer=setInterval(function(){
+                    tinkNext();
+                },4000)
+            }
+
+            function tinkNext(){
+                num++;
+                num >= $(".wapapp ol li").length ? num = 0 :num;
+                $(".wapapp ol li").eq(num).addClass("cur").siblings().removeClass("cur");
+                $(".wapapp ul li").eq(num).fadeIn().siblings().fadeOut();
+            }
+            tink();
+            $(".wapapp").hover(function(){
+                clearInterval(timer);
+            },function(){
+                tink();
+            });
+            /*----------------------------下一张------------------------------*/
+            $(".wapapp .ctrl-a a:nth-child(1)").click(function(){
+                tinkNext();
+            });
+
+            /*----------------------------上一张------------------------------*/
+            $(".wapapp .ctrl-a a:nth-child(2)").click(function(){
+                num--;
+                num < 0 ? num =$(".wapapp ol li").length-1:num;
+                console.log(num);
+                $(".wapapp ol li").eq(num).addClass("cur").siblings().removeClass("cur");
+                $(".wapapp ul li").eq(num).fadeIn().siblings().fadeOut();
+            });
+
+            var result=$(".wapapp ol li").length * 10;
+            $(".wapapp ol li").each(function(i,ele){
+                //console.log($(ele).width());//宽度
+                result +=$(ele).width();
+            });
+
+           // console.log(result);
+            $(".wapapp ol").css({
+                width:result +"px"
+            });
+
+        });
+    </script>
+
+</body>
+</html>

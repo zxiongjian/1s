@@ -1,0 +1,55 @@
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+*{margin:0;padding:0}
+li{list-style-type:none}
+.box{
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+	overflow:hidden;
+}
+.box li{
+	margin:10px;
+	float:left;
+}
+.box img{
+	width:100px;height:80px;
+}
+.tipBox{
+	position:absolute;
+	display:none;
+}
+.tipBox img{
+	width:300px;height:200px;
+}
+</style>
+<script src="js/jquery.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<ul class="box">
+	<li><img src="images/0.jpg" /></li>
+    <li><img src="images/1.jpg" /></li>
+    <li><img src="images/2.jpg" /></li>
+    <li><img src="images/3.jpg" /></li>
+    <li><img src="images/4.jpg" /></li>
+    <li><img src="images/5.jpg" /></li>
+</ul>
+<script>
+$(".box li").hover(function(){
+	idx = $(".box li").index($(this));
+	$(this).append("<div class=tipBox><img src=images/"+idx+".jpg /></div>");
+	$(".tipBox").slideDown(300);
+},function(){
+	$(".tipBox").remove();	
+}).mousemove(function(e){
+	$(".tipBox").css("top",(e.pageY+10)+"px")
+				.css("left",(e.pageX+10)+"px");	
+})
+</script>
+</body>
+</html>

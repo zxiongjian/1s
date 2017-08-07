@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            display: block;
+            margin: auto;
+        }
+        .fix{
+            position: fixed;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<div class="top">
+    <img src="img/top.png">
+</div>
+<div class="nav">
+    <img src="img/nav.png">
+</div>
+<div class="top">
+    <img src="img/main.png">
+</div>
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+    var navH=$(".nav").offset().top; //nav距离  要在外面获取
+
+    $(window).scroll(function(){
+        var H=$(document).scrollTop(); //滚动距离
+        console.log(H+"H");
+        console.log(navH+"nav");
+        if(H >= navH)
+        {
+            $(".nav").addClass("fix")
+        }
+        else {
+            $(".nav").removeClass("fix")
+        }
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            position: absolute;
+            left:0px;
+            top:0px;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/ts.gif">
+    <script src="jquery-1.11.1.min.js"></script>
+<script>
+    var w=$("img").width() / 2;
+    $(document).bind("mousemove",function(ev){
+
+        $("img").css({
+            top:ev.pageY + "px",
+            left:ev.pageX - w + "px"
+        })
+    })  
+</script>
+</body>
+</html>
